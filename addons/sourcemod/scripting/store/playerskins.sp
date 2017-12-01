@@ -153,11 +153,8 @@ public PlayerSkins_Config(&Handle:kv, itemid)
 public PlayerSkins_Equip(client, id)
 {
 	new m_iData = Store_GetDataIndex(id);
-	if(g_eCvars[g_cvarSkinChangeInstant][aCache] && IsPlayerAlive(client) && (GetClientTeam(client)==g_ePlayerSkins[m_iData][iTeam] || GAME_SYN))//Not support to synergy
-	{
-		
+	if(g_eCvars[g_cvarSkinChangeInstant][aCache] && IsPlayerAlive(client) && (GetClientTeam(client)==g_ePlayerSkins[m_iData][iTeam] || GAME_SYN))
 		Store_SetClientModel(client, g_ePlayerSkins[m_iData][szModel], g_ePlayerSkins[m_iData][iSkin]);
-	}
 	else
 	{
 		if(Store_IsClientLoaded(client))
@@ -182,7 +179,7 @@ public PlayerSkins_Remove(client, id)
 public Action:PlayerSkins_PlayerSpawn(Handle:event,const String:name[],bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if(!IsClientInGame(client) || !IsPlayerAlive(client) || !(2<=GetClientTeam(client)<=3) || !GAME_SYN)//Not support to synergy
+	if(!IsClientInGame(client) || !IsPlayerAlive(client) || (!(2<=GetClientTeam(client)<=3) && !GAME_SYN))
 		return Plugin_Continue;
 			
 	new Float:Delay = Float:g_eCvars[g_cvarSkinDelay][aCache];

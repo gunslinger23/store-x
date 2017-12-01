@@ -9,3 +9,4 @@ Support game:
 5. left4dead
 6. left4dead2
 7. synergy
+8. obsidian conflict
